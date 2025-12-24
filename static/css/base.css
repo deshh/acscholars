@@ -1,0 +1,81 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+}
+
+h1 {
+    color: red;
+}
+
+img.bookcover {
+    height: 300px;
+    width: auto;
+}
+
+/*
+ * FIX 1: Universal Reset to Prevent Horizontal Scrollbar
+ * Sets the box-sizing model for easier layout and 
+ * removes default margins/padding that cause overflow.
+ */
+
+
+/*
+ * FIX 2: Ensure Hero Section is Truly Full Screen
+ * The hero-section must take up the full viewport height and width.
+ */
+.hero-section {
+    /* Set background image and overlay */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url("{% static 'images/budumadura.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    
+    /* Ensure it covers the full viewport */
+    min-height: 100vh; 
+    width: 100%; /* Use 100% instead of 100vw to respect overflow-x: hidden */
+    
+    /* Centering content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Logo Rotation Animation (remains the same) */
+@keyframes spin-vertical {
+    from { transform: perspective(1000px) rotateY(0deg); }
+    to { transform: perspective(1000px) rotateY(360deg); }
+}
+.rotate-logo {
+    animation: spin-vertical 6s linear infinite;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+}
+
+/* Button Visual Enhancements (remains the same) */
+.btn-results {
+    background-color: transparent; 
+    border-color: #FFD700;
+    color: #FFD700;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn-results:hover {
+    background-color: #FFD700; 
+    color: #333;
+    border-color: #FFD700;
+}
+.btn-donate {
+    background-color: #FFD700;
+    color: #580B0B;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-donate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.7);
+    background-color: #FFD700;
+}

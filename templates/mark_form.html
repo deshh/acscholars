@@ -1,0 +1,156 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#id_student').select2({
+            placeholder: "Select student",
+            allowClear: true
+        });
+    });
+
+    $(document).ready(function () {
+        $('#id_exam').select2({
+            placeholder: "Select exam",
+            allowClear: true
+        });
+    });
+
+    $(document).ready(function () {
+        $('#id_subject').select2({
+            placeholder: "Select subject",
+            allowClear: true
+        });
+    });
+</script>
+<div class="container mt-5">
+    <h2>{% if object %}Edit Marks{% else %}Add Marks{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Display non-field errors (form-wide errors) -->
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <!-- Student Field -->
+        <div class="form-group">
+            <label for="id_student">Student:</label>
+            {{ form.student }}
+            <!-- Display field-specific errors -->
+            {% if form.student.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.student.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Exam Field -->
+        <div class="form-group">
+            <label for="id_exam">Exam:</label>
+            {{ form.exam }}
+            {% if form.exam.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.exam.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Subject Field -->
+        <div class="form-group">
+            <label for="id_subject">Subject:</label>
+            {{ form.subject }}
+            {% if form.subject.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.subject.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Marks Obtained Field -->
+        <div class="form-group">
+            <label for="id_marks_obtained">Marks Obtained:</label>
+            {{ form.marks_obtained }}
+            {% if form.marks_obtained.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.marks_obtained.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Grade Awarded Field -->
+        <div class="form-group">
+            <label for="id_grade_awarded">Grade Awarded:</label>
+            {{ form.grade_awarded }}
+            {% if form.grade_awarded.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.grade_awarded.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Special Remarks Field -->
+        <div class="form-group">
+            <label for="id_special_remarks">Special Remarks:</label>
+            {{ form.special_remarks }}
+            {% if form.special_remarks.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.special_remarks.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'student-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Custom styling for Patrons field -->
+<style>
+    select#id_student,
+    #id_exam,
+    #id_subject {
+        display: block;
+        width: 100%;
+        /* Make the select box full-width */
+        padding: .375rem 1.75rem .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        height: auto;
+        max-height: 200px;
+        /* Adjust the max height as necessary */
+        overflow-y: auto;
+        /* Allow scrolling if there are too many options */
+    }
+
+    @media (max-width: 576px) {
+
+        select#id_student,
+        #id_exam,
+        #id_subject {
+            font-size: .875rem;
+            /* Slightly smaller font size on small screens */
+        }
+    }
+</style>
+{% endblock %}

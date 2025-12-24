@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    # command: python /code/manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py create_groups &&
+      python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    # environment:
+    #   - DATABASE_URL=${DATABASE_URL} # Use environment variable for DB connection
+    #   - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} # Keep secret key secure
+    #   - DJANGO_DEBUG=1 # Disable debug mode in production
+    #   - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS} # Set allowed hosts
+    ports:
+      - 8000:8000
+    env_file:
+      - .env.remote
+    # depends_on:
+    #   - wait-for-it
+  # wait-for-it:
+  #   image: alpine
+  #   command: sh -c 'until nc -z -v -w30 ${SUPABASE_DB_HOST} 5432; do echo "Waiting for database connection..."; sleep 5; done'
+  #   environment:
+  #     - SUPABASE_DB_HOST=${SUPABASE_DB_HOST}

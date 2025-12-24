@@ -1,0 +1,71 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-5">Subjects</h2>
+    <!-- <p>{{ subjects|pprint }}</p> -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject Name</th>
+                <th>Subject Code</th>
+                <th class="text-center">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ subject.name }}</td>
+                <td>{{ subject.code }}</td>
+                <td class="text-center"><a href="{% url 'subject-edit' subject.pk %}" class="text-primary"
+                        data-bs-toggle="tooltip" title="Edit this record">
+                        <i class="fas fa-edit fa-lg" style="vertical-align: middle;"></i>
+                    </a>
+                </td>
+                {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Subject pagination">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-item"><a
+                    class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+        </ul>
+    </nav>
+    <!-- <p>Page number: {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+    <p>Students count on this page: {{ students|length }}</p> -->
+    <a href="{% url 'subject-add' %}" class="btn btn-success">Add New Subject</a>
+</div>
+{% endblock %}

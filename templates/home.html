@@ -1,0 +1,113 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Ananda Scholar - Home{% endblock %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block page_container %}
+<style>
+/* * CRITICAL FIXES: These must be applied to the top-level elements (body/html).
+ * The !important is used here for maximum conflict resolution.
+ */
+body, html {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%; 
+    overflow-x: hidden; 
+}
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url("{% static 'images/budumadura.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    min-height: 100vh; 
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+/* Remaining button and logo styles */
+@keyframes spin-vertical {
+    from { transform: perspective(1000px) rotateY(0deg); }
+    to { transform: perspective(1000px) rotateY(360deg); }
+}
+.rotate-logo {
+    animation: spin-vertical 6s linear infinite;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+}
+.btn-results {
+    background-color: transparent; 
+    border-color: #FFD700;
+    color: #FFD700;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn-results:hover {
+    background-color: #FFD700; 
+    color: #333;
+    border-color: #FFD700;
+}
+.btn-donate {
+    background-color: #FFD700;
+    color: #580B0B;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-donate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.7);
+    background-color: #FFD700;
+}
+
+
+</style>
+
+{% block content %}
+<div class="hero-section">
+    <div class="container text-center">
+        <div class="mb-5">
+            <img src="{% static 'images/ac_logo.png' %}" 
+                 class="rotate-logo img-fluid" 
+                 style="max-height: 200px;" 
+                 alt="College Crest">
+        </div>
+
+        <h1 class="display-3 fw-bold mb-3">Ananda Scholar</h1>
+        <p class="lead mb-5 mx-auto text-light opacity-75" style="max-width: 700px;">
+            Join us in empowering the next generation of Anandians.
+        </p>
+
+        <div class="row justify-content-center g-4">
+            <div class="col-md-5 col-lg-4">
+                <a href="{% url 'student-list' %}" class="btn btn-results w-100 py-3 rounded-pill fw-bold">
+                    <i class="bi bi-mortarboard"></i> View Student Results
+                </a>
+            </div>
+
+            <div class="col-md-5 col-lg-4">
+                <a href="https://karuna.lk/program/anandacollegeoba.html" target="_blank" class="btn btn-donate w-100 py-3 rounded-pill fw-bold">
+                    MAKE A CONTRIBUTION
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-5 pt-4 border-top border-warning mx-auto" style="max-width: 500px;">
+            <p class="small text-uppercase text-muted mb-2 fw-bold" style="color: #FFD700 !important;">Secure Payments</p>
+            <div class="bg-white p-2 rounded d-inline-block shadow-sm">
+                <img src="{% static 'images/karuna.png' %}" height="35" class="me-3" alt="Karuna.lk">
+                <img src="{% static 'images/payments.jpg' %}" height="30" alt="Visa, MasterCard, Bank Transfer">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% endblock page_container %}
+{% block footer %}
+{% endblock footer %}

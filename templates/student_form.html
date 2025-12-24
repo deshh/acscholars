@@ -1,0 +1,87 @@
+{% extends "_base.html" %}
+
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#id_patrons').select2({
+            placeholder: "Select patrons",
+            allowClear: true
+        });
+    });
+</script>
+
+
+<div class="container mt-5">
+    <h2>{% if object %}Edit Student{% else %}Add New Student{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_index_number">Index number:</label>
+            {{ form.index_number }}
+        </div>
+        <div class="form-group">
+            <label for="id_first_name">First name:</label>
+            {{ form.first_name }}
+        </div>
+        <div class="form-group">
+            <label for="id_middle_name">Middle name:</label>
+            {{ form.middle_name }}
+        </div>
+        <div class="form-group">
+            <label for="id_last_name">Last name:</label>
+            {{ form.last_name }}
+        </div>
+        <div class="form-group">
+            <label for="id_date_of_birth">Date of birth:</label>
+            {{ form.date_of_birth }}
+        </div>
+        <div class="form-group">
+            <label for="id_fund_assistance_type">Funding Type:</label>
+            {{ form.fund_assistance_type }}
+        </div>
+        <div class="form-group">
+            <label for="id_patrons">Patrons:</label>
+            {{ form.patrons }}
+        </div>
+        <div class="form-group">
+            <label for="id_current_academic_level">Current Academic Level:</label>
+            {{ form.current_academic_level }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'student-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Custom styling for Patrons field -->
+<style>
+    select#id_patrons {
+        display: block;
+        width: 100%;
+        /* Make the select box full-width */
+        padding: .375rem 1.75rem .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        height: auto;
+        max-height: 200px;
+        /* Adjust the max height as necessary */
+        overflow-y: auto;
+        /* Allow scrolling if there are too many options */
+    }
+
+    @media (max-width: 576px) {
+        select#id_patrons {
+            font-size: .875rem;
+            /* Slightly smaller font size on small screens */
+        }
+    }
+</style>
+{% endblock %}

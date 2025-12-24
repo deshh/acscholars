@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<form class="centred ui form">
+    <input type="text" name="search" placeholder="Search..." value="{{ search }}">
+</form>
+{% if marks %}
+<div class="container">
+    <h2 class="mt-5">Exam Records List</h2>
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Student</th>
+                <th>Exam Reference</th>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Remarks</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ mark.student }}</td>
+                <td>{{ mark.exam }}</td>
+                <td>{{ mark.subject }}</td>
+                <td>{{ mark.marks_obtained }}</td>
+                <td>{{ mark.special_remarks }}</td>
+                <td><a href="{% url 'mark-edit' mark.pk %}">Edit</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'mark-add' %}" class="btn btn-success">Add New Student Exam Record</a>
+
+</div>
+{% else %}
+<h3 class="ui header center aligned">No results!</h3>
+{% endif %}
+
+{% if marks.has_next %}
+<div class="ui divider"></div>
+
+<a href="{% url 'search-list' %}?page={{ marks.next_page_number }}&search={{search}}">
+    <button class="ui button primary">
+        Next Page
+    </button>
+</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-maroon fw-bold mb-0">
+            <i class="fas fa-clipboard-check me-2"></i>&nbsp;Marks for {{ student.first_name }} {{ student.last_name }}
+        </h2>
+        <a href="{% url 'student-detail' student.pk %}" class="btn btn-outline-secondary shadow-sm">
+            <i class="fas fa-arrow-left me-1"></i> Back to Profile
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body bg-light rounded">
+            <form method="GET" action="{% url 'student-marks' student.pk %}" class="row g-3 align-items-end">
+                <div class="col-md-6 col-lg-4">
+                    <label for="subject" class="form-label fw-bold small text-muted text-uppercase">Filter by Subject</label>
+                    <select name="subject" id="subject" class="form-select select2">
+                        <option value="">All Subjects</option>
+                        {% for subject in subjects %}
+                            <option value="{{ subject.id }}" {% if request.GET.subject == subject.id|stringformat:"i" %}selected{% endif %}>
+                                {{ subject.name }} ({{ subject.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6 col-lg-4 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                        <i class="fas fa-filter me-1"></i> Apply Filter
+                    </button>
+                    {% if request.GET.subject %}
+                        <a href="{% url 'student-marks' student.pk %}" class="btn btn-outline-danger shadow-sm">
+                            <i class="fas fa-times me-1"></i> Clear
+                        </a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Exam</th>
+                            <th>Subject</th>
+                            <th class="text-center">Marks Obtained</th>
+                            <th class="text-center">Grade Awarded</th>
+                            {% if is_operator %}
+                            <th class="text-center pe-4">Actions</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mark in marks %}
+                        <tr>
+                            <td class="ps-4 fw-bold">{{ mark.exam.name }}</td>
+                            <td>{{ mark.subject.name }}</td>
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark border px-3 py-2">{{ mark.marks_obtained }}</span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge rounded-pill {% if mark.grade_awarded == 'A' %}bg-success{% else %}bg-secondary{% endif %} px-3">
+                                    {{ mark.grade_awarded|default:"N/A" }}
+                                </span>
+                            </td>
+                            {% if is_operator %}
+                            <td class="text-center pe-4">
+                                <a href="{% url 'mark-edit' mark.pk %}" class="btn btn-sm btn-outline-primary rounded-circle">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="fas fa-search fa-3x mb-3 opacity-25"></i>
+                                <p>No records found for the selected criteria.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% if is_operator %}
+        <div class="card-footer bg-white border-top-0 py-3 text-end pe-4">
+            <a href="{% url 'mark-add' %}" class="btn btn-success shadow-sm">
+                <i class="fas fa-plus me-1"></i> Add New Record
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
