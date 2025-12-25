@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7ee055973b7809abc555b93f73a310d722b38363ef308d83a05f327d189b810f"
+            "sha256": "366cb68dc13e1941d76418220e33ded10f95cc726ce08b8e03de7a1994a90afc"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -129,6 +129,14 @@
             ],
             "version": "==1.2.0"
         },
+        "click": {
+            "hashes": [
+                "sha256:12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a",
+                "sha256:981153a64e25f12d547d3426c367a4857371575ee7ad18df2a6183ab0545b2a6"
+            ],
+            "markers": "python_version >= '3.10'",
+            "version": "==8.3.1"
+        },
         "crispy-bootstrap4": {
             "hashes": [
                 "sha256:208673bf6a25892a656971af7a00e18ba2f7f06cd4a0d667923bd6134e64d276",
@@ -172,6 +180,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==23.0.0"
+        },
+        "h11": {
+            "hashes": [
+                "sha256:4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1",
+                "sha256:63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==0.16.0"
         },
         "numpy": {
             "hashes": [
@@ -248,7 +264,7 @@
                 "sha256:ecb0019d44f4cdb50b676c5d0cb4b1eae8e15d1ed3d3e6639f986fc92b2ec52c",
                 "sha256:f935c4493eda9069851058fa0d9e39dbf6286be690066509305e52912714dbb2"
             ],
-            "markers": "python_version >= '3.12'",
+            "markers": "python_version == '3.11'",
             "version": "==2.4.0"
         },
         "packaging": {
@@ -446,6 +462,15 @@
             ],
             "markers": "python_version >= '2'",
             "version": "==2025.3"
+        },
+        "uvicorn": {
+            "hashes": [
+                "sha256:839676675e87e73694518b5574fd0f24c9d97b46bea16df7b8c05ea1a51071ea",
+                "sha256:c6c8f55bc8bf13eb6fa9ff87ad62308bbbc33d0b67f84293151efe87e0d5f2ee"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.10'",
+            "version": "==0.40.0"
         },
         "whitenoise": {
             "extras": [
