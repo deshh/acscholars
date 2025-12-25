@@ -8,13 +8,14 @@ django = "~=5.0.7"
 psycopg2-binary = "==2.9.9"
 django-crispy-forms = "==2.3"
 crispy-bootstrap4 = "==2024.1"
-plotly = "==5.23.0"
-pandas = "==2.2.2"
+plotly = "==6.5.0"
+pandas = "==2.3.3"
 dj-database-url = "==2.2.0"
 python-dotenv = "==1.0.1"
 gunicorn = "==23.0.0"
 whitenoise = {extras = ["brotli"], version = "==6.11.0"}
 uvicorn = "==0.40.0"
+numpy = "==2.4.0"
 
 [dev-packages]
 
