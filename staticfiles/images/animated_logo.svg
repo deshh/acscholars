@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <style>
+    /* Define the keyframes for a full 360-degree rotation on the Y-axis */
+    @keyframes spinY {
+      from {
+        transform: perspective(1000px) rotateY(0deg);
+      }
+      to {
+        transform: perspective(1000px) rotateY(360deg);
+      }
+    }
+
+    /* Apply the animation to the image class */
+    .rotating-logo {
+      /* Ensure the transform originates from the exact center of the image */
+      transform-origin: center center;
+      transform-box: fill-box;
+      
+      /* Run the 'spinY' animation over 5 seconds, 
+         keep uniform speed (linear), and repeat forever (infinite).
+      */
+      animation: spinY 5s linear infinite;
+    }
+  </style>
+
+  <image 
+    href="ananda_college_profile_pic.png" 
+    class="rotating-logo"
+    x="0" 
+    y="0" 
+    width="500" 
+    height="500" 
+    preserveAspectRatio="xMidYMid meet"
+  />
+</svg>

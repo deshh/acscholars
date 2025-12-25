@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.hero {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.navbar {
+    background: linear-gradient(45deg, #007bff, #8794d0);
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #f8f9fa;
+    color: #007bff !important;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.arrow-right {
+    position: absolute;
+    top: 50%;
+    right: -2rem;
+    /* Adjust this value to fit your design */
+    transform: translateY(-50%);
+    z-index: 10;
+    /* Ensures the arrow is on top of the cards */
+}
+
+.card {
+    position: relative;
+}
+
+
+a.text-danger i {
+    font-size: 1.2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+a.text-danger:hover i {
+    transform: scale(1.2);
+}
+
+.icon-btn {
+    vertical-align: middle;
+    font-size: 1.5em;
+    /* Adjust icon size as needed */
+    margin-left: 10px;
+    /* Adjust spacing between icons */
+}
+
+
+
+.navbar-brand i {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover i {
+    transform: rotate(20deg);
+}
+
+
+/* process flow banner */
+.banner {
+    background-color: #007bff;
+    /* Blue background */
+    color: white;
+    /* White text */
+    padding: 20px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    /* Smooth hover effect */
+    border-radius: 8px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Make it clickable */
+}
+
+.banner h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.banner p {
+    font-size: 1.25rem;
+}
+
+/* Hover effect */
+.banner:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+}
+
+@keyframes spin-vertical {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+
+/**/
+/* The Animation */
+@keyframes spin-vertical {
+    from { transform: perspective(1000px) rotateY(0deg); }
+    to { transform: perspective(1000px) rotateY(360deg); }
+}
+
+/* The Class to apply */
+.rotate-logo {
+    animation: spin-vertical 6s linear infinite;
+    transform-style: preserve-3d;
+    /* optional: adds a nice drop shadow to the rotating element */
+    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.2)); 
+}
+
+/* Hover effect for cards to make them interactive */
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}

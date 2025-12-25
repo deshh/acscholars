@@ -1,0 +1,361 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    /* Large top padding to clear the 10px offset + navbar height + capsule margins */
+    padding-top: 80px !important;
+}
+
+.content-wrap {
+    flex: 1 0 auto; /* This makes the content area expand to fill space */
+}
+
+footer {
+    flex-shrink: 0; /* Prevents footer from squishing */
+}
+
+/* Ensure the Bootstrap container doesn't have excess top margin on the home page */
+.home-page .content-wrap {
+    flex: none; 
+}
+
+/* Specific fix for the filter card spacing */
+.content-wrap .container {
+    margin-top: 20px;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.hero {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+
+/* .navbar {
+    background: linear-gradient(45deg, #007bff, #8794d0);
+} */
+
+.navbar-nav .nav-link {
+    /* color: #fff !important; */
+    position: relative;
+    color: rgba(255, 255, 255, 0.85) !important; /* Slightly faded white for better contrast */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother "ease-in-out" curve */
+    padding: 0.5rem 1.2rem !important;
+    border-radius: 50px; /* Matching the capsule shape */
+}
+
+/* 4. Logout Button Specific Polish (Optional) */
+/* If your logout has a specific class or is the last child */
+.navbar-nav .nav-link[href*="logout"]:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover {
+    /* background-color: #f8f9fa;
+    color: #007bff !important;
+    transition: all 0.3s ease; */
+    background-color: rgba(255, 215, 0, 0.15) !important; /* Soft gold tint */
+    color: #FFD700 !important; /* Elegant Gold text */
+    transform: translateY(-1px); /* Very subtle lift effect */
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    /* content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease; */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #FFD700;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6); /* Subtle gold glow */
+}
+
+.navbar-nav .nav-link:hover::after {
+    /* width: 100%; */
+    width: 50%; /* Only stretches halfway for a sophisticated look */
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.arrow-right {
+    position: absolute;
+    top: 50%;
+    right: -2rem;
+    /* Adjust this value to fit your design */
+    transform: translateY(-50%);
+    z-index: 10;
+    /* Ensures the arrow is on top of the cards */
+}
+
+.card {
+    position: relative;
+}
+
+
+a.text-danger i {
+    font-size: 1.2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+a.text-danger:hover i {
+    transform: scale(1.2);
+}
+
+.icon-btn {
+    vertical-align: middle;
+    font-size: 1.5em;
+    /* Adjust icon size as needed */
+    margin-left: 10px;
+    /* Adjust spacing between icons */
+}
+
+
+
+.navbar-brand i {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover i {
+    transform: rotate(20deg);
+}
+
+/* 3. Special Polish for the Brand/Logo Hover */
+.navbar-brand:hover {
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+    transition: filter 0.3s ease;
+}
+
+
+/* process flow banner */
+.banner {
+    background-color: #007bff;
+    /* Blue background */
+    color: white;
+    /* White text */
+    padding: 20px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    /* Smooth hover effect */
+    border-radius: 8px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Make it clickable */
+}
+
+.banner h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.banner p {
+    font-size: 1.25rem;
+}
+
+/* Hover effect */
+.banner:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+}
+
+@keyframes spin-vertical {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.rotate-logo {
+  /* Apply the animation: spin-vertical, 5 seconds, linear speed, infinite loop */
+  animation: spin-vertical 5s linear infinite;
+
+  /* Optional: Adds a 3D effect so it doesn't look flat while turning */
+  transform-style: preserve-3d;
+}
+
+/* Option 7: Bordered Floating Capsule */
+.navbar.custom-nav-theme {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 100px;
+    background: #580B0B !important;
+    border: 2px solid #FFD700;
+    padding: 0.5rem 2rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    /*optional*/
+    z-index: 1050; 
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar.custom-nav-theme .nav-link {
+    color: #ffffff !important;
+    margin: 0 10px;
+}
+
+.navbar.custom-nav-theme .nav-link:hover {
+    color: #FFD700 !important;
+}
+
+/* Make it stick to the top properly */
+.fixed-top {
+    top: 15px;
+}
+
+
+/* 1. Force the hamburger lines to be white/gold */
+.navbar.custom-nav-theme .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 215, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+/* 2. Style the toggler button border and focus state */
+.navbar.custom-nav-theme .navbar-toggler {
+    border-color: rgba(255, 215, 0, 0.5) !important; /* Gold border */
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.navbar.custom-nav-theme .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25); /* Gold glow on click */
+    outline: none;
+}
+
+/* 3. Responsive Adjustment: Ensure the capsule expands nicely when open on mobile */
+@media (max-width: 991.98px) {
+    body {
+        padding-top: 75px !important;
+    }
+
+    .navbar.custom-nav-theme {
+        border-radius: 20px; /* Squarer corners on mobile look better when expanded */
+        width: 95%; /* Give a bit more room on small screens */
+    }
+    
+    .navbar.custom-nav-theme .navbar-collapse {
+        margin-top: 15px;
+        border-top: 1px solid rgba(255, 215, 0, 0.2);
+        padding-top: 10px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: -2rem; /* Offsets the navbar's internal padding */
+        margin-right: -2rem;
+        overflow: hidden; /* Keeps the rounded corners of the parent */
+    }
+
+    .navbar.custom-nav-theme .nav-link {
+        width: 100%;
+        display: block;
+        padding: 0.8rem 2rem !important; /* Increase vertical clickable area */
+        margin: 0 !important; /* Remove margins that cause gaps */
+        border-radius: 0; /* Squared edges look better for full-width items */
+        text-align: left;
+    }
+
+    /* 3. Ensure the hover effect covers the entire row */
+    .navbar.custom-nav-theme .nav-link:hover {
+        background-color: rgba(255, 215, 0, 0.15) !important;
+        transform: none; /* Disabling the lift effect for a cleaner mobile feel */
+        width: 100%;
+    }
+
+    /* 4. Remove the underline animation on mobile as it clashes with full-row highlights */
+    .navbar.custom-nav-theme .nav-link::after {
+        display: none;
+    }
+}
+
+.border-top-separator {
+    margin-top: 10px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #eee !important;
+}
+
+
+/* Custom sizing for the Edit Action button */
+.btn-edit-circle {
+    width: 28px;                  /* Smaller button diameter */
+    height: 28px;
+    padding: 0 !important;        /* Remove default padding to prevent offset */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 50% !important; */
+    border: 1px solid #007bff;
+    color: #007bff;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+/* .btn-edit-circle i { */
+    /* font-size: 0.75rem;           Makes the icon smaller */
+/* } */
+
+.btn-edit-circle:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: scale(1.1);        /* Subtle pop effect on hover */
+}
+
+
+/* 1. Force Select2 to always fit its parent column */
+.select2-container {
+    width: 100% !important;
+}
+
+/* 2. Fix vertical overlapping when columns stack on small screens */
+@media (max-width: 767.98px) {
+    .row > [class*='col-'] {
+        margin-bottom: 15px; /* Adds a safety gap between stacked elements */
+    }
+    
+    .row > [class*='col-']:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* 3. Ensure labels don't get squashed */
+label {
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
