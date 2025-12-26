@@ -1,5 +1,8 @@
 html, body {
     height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
 }
 
 body {
@@ -11,6 +14,7 @@ body {
     padding: 0;
     /* Large top padding to clear the 10px offset + navbar height + capsule margins */
     padding-top: 80px !important;
+    /* padding-top: 0;  */
 }
 
 .content-wrap {
@@ -59,6 +63,10 @@ header {
 /* .navbar {
     background: linear-gradient(45deg, #007bff, #8794d0);
 } */
+ .navbar {
+    margin-top: 0 !important;
+    border-radius: 10px !important;
+}
 
 .navbar-nav .nav-link {
     /* color: #fff !important; */
@@ -351,6 +359,16 @@ a.text-danger:hover i {
     .row > [class*='col-']:last-child {
         margin-bottom: 0;
     }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Better touch targets for mobile thumbs */
+    }
+    
+    .footer-section {
+        padding-top: 20px;
+    }
 }
 
 /* 3. Ensure labels don't get squashed */
@@ -358,4 +376,364 @@ label {
     margin-bottom: 0.5rem;
     display: inline-block;
 }
+
+.footer-section {
+    background-color: #580B0B; /* Institutional Maroon */
+    color: #ffffff;
+    border-top: 4px solid #FFD700; /* Gold Accent Bar */
+    position: relative;
+    z-index: 10;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #FFD700;
+    opacity: 1;
+}
+
+.btn-footer-donate {
+    background-color: #FFD700;
+    color: #580B0B;
+    font-weight: 700;
+    border: none;
+}
+
+.btn-footer-donate:hover {
+    background-color: #fff;
+    color: #580B0B;
+    transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+:root {
+    --maroon: #580B0B;
+    --gold: #FFD700;
+}
+
+/* Base Footer Styling */
+.footer-compact {
+    background-color: var(--maroon);
+    color: #ffffff;
+    /* border-top: 3px solid var(--gold); */
+    width: 100%;
+    border-top: 2px solid #FFD700;
+    line-height: 1.2; /* Tighter text lines */
+}
+
+.text-gold { color: var(--gold) !important; }
+
+/* Font size for smaller vertical footprint */
+.x-small { font-size: 0.75rem; }
+
+/* Navigation Links - Forced Inline on Desktop */
+.footer-nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 8px; /* Horizontal spacing */
+    font-size: 0.85rem;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.footer-nav-links a:hover {
+    opacity: 1;
+    color: var(--gold);
+}
+
+/* Compact Button */
+.btn-gold-sm {
+    background-color: var(--gold);
+    color: var(--maroon);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 6px 20px;
+    border: none;
+}
+
+/* --- MOBILE SPECIFIC FIXES --- */
+@media (max-width: 767px) {
+    .footer-compact {
+        padding: 15px 0 10px; /* Extreme height reduction */
+    }
+    
+    .footer-nav-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px; /* Keeps them on ONE line if possible, or tightly wraps */
+        margin-bottom: 5px;
+        margin-top: -10px;
+    }
+
+    .footer-nav-links a {
+        margin: 0;
+        font-size: 0.8rem;
+    }
+
+    /* Reduce spacing between sections */
+    .mb-3 {
+        margin-bottom: 0.75rem !important;
+    }
+}
+
+/* --- PC SPECIFIC FIXES --- */
+@media (min-width: 992px) {
+    .footer-compact .row {
+        min-height: 20px; /* Prevents it from being too tall on PC */
+    }
+}
+
+
+
+
+
+/* Container Background & Border */
+.footer-pro-compact {
+    background-color: #580B0B;
+    color: #ffffff;
+    border-top: 2px solid #FFD700;
+    width: 100%;
+}
+
+.text-gold { color: #FFD700 !important; }
+
+/* Typography Compression */
+.x-small { font-size: 0.7rem; }
+.copyright-text { 
+    font-size: 0.6rem; 
+    opacity: 0.5;
+    letter-spacing: 0.5px;
+}
+
+/* Inline Navigation for PC */
+.footer-nav-inline a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+.footer-nav-inline a:hover { opacity: 1; color: #FFD700; }
+
+/* The "Tiny" Button */
+.btn-gold-pill-sm {
+    background-color: #FFD700;
+    color: #580B0B;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 4px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+.btn-gold-pill-sm:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+}
+
+/* --- MOBILE SPECIFIC HEIGHT FIX --- */
+@media (max-width: 767px) {
+    .footer-pro-compact .py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+    
+    .footer-brand-group h6 {
+        font-size: 0.85rem; /* Smaller font on mobile */
+    }
+
+    /* Force the brand and button to stay on the same horizontal line */
+    .footer-pro-compact .d-flex {
+        flex-direction: row !important; 
+    }
+}
+
+
+
+/*            */
+/* Branding */
+.text-maroon { color: #580B0B !important; }
+.bg-maroon { background-color: #580B0B !important; }
+.bg-gold { background-color: #FFD700 !important; }
+
+/* Add Button */
+.btn-maroon-gold {
+    background-color: #580B0B;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+}
+.btn-maroon-gold:hover {
+    background-color: #FFD700;
+    color: #580B0B;
+}
+
+/* UI Polish */
+.hover-lift:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+.uppercase { text-transform: uppercase; }
+.tracking-wider { letter-spacing: 0.05em; }
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+    h2 { font-size: 1.5rem; }
+    .card-body { border-left: 4px solid #580B0B; } /* Institutional side-bar accent */
+
+    .mobile-fab-sm {
+        width: 40px;
+        height: 40px;
+        padding: 0 !important; /* Makes it a perfect circle on mobile */
+    }
+}
+
+
+
+
+
+/* 1. Institutional Badge Styling */
+.badge-institutional {
+    background-color: transparent;
+    color: #580B0B;
+    border: 1px solid #FFD700;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: fit-content;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+/* 2. Soft UI (Ghost) Button Concept */
+.action-btn {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px; /* Smooth squircles look more premium */
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border: none;
+}
+
+/* Soft Color Palette */
+.btn-soft-primary {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+}
+
+.btn-soft-maroon {
+    background-color: rgba(88, 11, 11, 0.08);
+    color: #580B0B;
+}
+
+.btn-soft-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+/* Interactions */
+.action-btn:active {
+    transform: scale(0.92);
+    filter: brightness(0.9);
+}
+
+/* 3. Mobile Card Polish */
+.student-mobile-card {
+    border-left: 5px solid #580B0B !important; /* Thick brand anchor */
+    transition: box-shadow 0.3s ease;
+}
+
+.student-mobile-card:hover {
+    box-shadow: 0 8px 25px rgba(88, 11, 11, 0.1) !important;
+}
+
+.action-footer {
+    border-top: 1px dashed #eee !important;
+}
+
+/* Typography refinement */
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+
+
+
+
+
+/* Compact Card Styling */
+.student-mobile-card-compact {
+    border-left: 4px solid #580B0B !important;
+}
+
+/* Reduced Padding */
+.student-mobile-card-compact .card-body {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+}
+
+/* Smaller Badge for smaller cards */
+.badge-institutional-sm {
+    background-color: rgba(88, 11, 11, 0.05);
+    color: #580B0B;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+/* Smaller Action Buttons */
+.action-btn-sm {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.action-btn-sm:active {
+    transform: scale(0.9);
+}
+
+/* Dashed separator to keep it light */
+.border-top-dashed {
+    border-top: 1px dashed #eee !important;
+}
+
+/* Utility for very small labels */
+.x-small {
+    font-size: 0.65rem;
+}
+
+
+
+
+
+
+
 

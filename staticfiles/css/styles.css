@@ -7,8 +7,9 @@ body {
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolls */
     /* Large top padding to clear the 10px offset + navbar height + capsule margins */
     padding-top: 80px !important;
 }
@@ -59,6 +60,18 @@ header {
 /* .navbar {
     background: linear-gradient(45deg, #007bff, #8794d0);
 } */
+ .navbar {
+    margin: 0 !important;
+    border-radius: 0 !important; /* Mobile navbars look better edge-to-edge */
+}
+
+/* Adjusting the Hero to blend with the Banner */
+.impact-hero {
+    margin-top: 0;
+    padding-top: 60px; /* Space for the fixed/sticky navbar */
+    padding-bottom: 100px; /* Extra room for the banner to overlap */
+    position: relative;
+}
 
 .navbar-nav .nav-link {
     /* color: #fff !important; */
@@ -301,6 +314,32 @@ a.text-danger:hover i {
     /* 4. Remove the underline animation on mobile as it clashes with full-row highlights */
     .navbar.custom-nav-theme .nav-link::after {
         display: none;
+    }
+
+    /* Remove padding from the main container to allow banner to touch edges */
+    .container.mb-5 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100%;
+    }
+
+    .stats-banner {
+        margin-top: -60px; /* Pull it further up into the hero gradient */
+        border-radius: 0 !important; /* Edge-to-edge on mobile for a cleaner look */
+        padding: 40px 20px !important;
+        width: 100% !important;
+        left: 0;
+    }
+
+    /* Fix for "Your Generosity in Action" spacing */
+    .impact-hero h1 {
+        font-size: 2rem !important;
+        padding: 0 15px;
+    }
+    
+    .impact-hero p {
+        padding: 0 20px;
+        margin-bottom: 40px !important;
     }
 }
 

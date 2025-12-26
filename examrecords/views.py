@@ -76,6 +76,10 @@ def filter_list_view(request):
     paginator = Paginator(exam_records, 10)  # Show 10 exam records per page
     page = request.GET.get('page')
     
+    is_operator = False
+    if request.user.is_authenticated:
+        is_operator = request.user.groups.filter(name='operator').exists()
+
     try:
         exam_records = paginator.page(page)
     except PageNotAnInteger:
@@ -90,6 +94,7 @@ def filter_list_view(request):
         'exams': exams,
         'subjects': subjects,
         'exam_records': exam_records,  # Paginated exam records
+        'is_operator' : is_operator,
     }
     return render(request, 'mark_filter_list.html', context)
 

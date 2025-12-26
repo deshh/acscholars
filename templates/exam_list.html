@@ -1,69 +1,110 @@
 {% extends "_base.html" %}
 
 {% block content %}
-<div class="container">
-    <h2 class="mt-5">Exams</h2>
-    <table class="table table-hover mt-4">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Exam Name</th>
-                <th>Date</th>
-                <th class="text-center">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for exam in exams %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ exam.name }}</td>
-                <td>{{ exam.date }}</td>
-                <td class="text-center"><a href="{% url 'exam-edit' exam.pk %}" class="text-primary"
-                        data-bs-toggle="tooltip" title="Edit this record">
-                        <i class="fas fa-edit fa-lg" style="vertical-align: middle;"></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container content-wrap py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-maroon m-0">Exams</h2>
+        {% if is_operator %}
+        <a href="{% url 'exam-add' %}" class="btn btn-maroon-gold rounded-pill shadow-sm d-flex align-items-center justify-content-center mobile-fab-sm">
+            <i class="fas fa-plus"></i>
+            <span class="d-none d-md-inline ms-2">Add Exam</span>
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="d-block d-md-none">
+        {% for exam in exams %}
+        <div class="card mb-2 border-0 shadow-sm rounded-3 overflow-hidden student-mobile-card-compact">
+            <div class="card-body py-2 px-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-maroon mb-0 text-capitalize text-truncate" style="max-width: 70%;">
+                        {{ exam.name }}
+                    </h6>
+                    <span class="badge badge-institutional-sm bg-light text-maroon">
+                        <i class="far fa-calendar-alt me-1"></i>{{ exam.date|date:"M d, Y" }}
+                    </span>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top-dashed">
+                    <small class="text-muted x-small uppercase tracking-wider">Exam Period: {{ exam.date|date:"Y" }}</small>
+                    <div class="d-flex justify-content-center align-items-center">
+                        {% if is_operator %}
+                        <a href="{% url 'exam-edit' exam.pk %}" class="action-btn-sm btn-soft-maroon" title="Edit Exam">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="table-responsive d-none d-md-table shadow-sm rounded-4 overflow-hidden w-100 mb-4">
+        <table class="table table-hover align-middle mb-0 bg-white">
+            <thead class="bg-maroon text-white">
+                <tr>
+                    <th class="ps-4" style="width: 80px;">#</th>
+                    <th>Exam Name</th>
+                    <th>Date Scheduled</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exam in exams %}
+                <tr>
+                    <td class="ps-4 text-muted">{{ forloop.counter }}</td>
+                    <td class="fw-bold text-maroon">{{ exam.name }}</td>
+                    <td>{{ exam.date|date:"F d, Y" }}</td>
+                    <td class="text-center px-4">
+                        <div class="d-flex justify-content-center gap-3">
+                            {% if is_operator %}
+                            <a href="{% url 'exam-edit' exam.pk %}" class="text-maroon hover-lift" title="Edit Exam">
+                                <i class="fas fa-edit fa-lg"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if page_obj.has_other_pages %}
     <nav aria-label="Exam pagination">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center mt-4">
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page=1" aria-label="First">
-                    <span aria-hidden="true">&laquo;&laquo;</span>
-                </a>
+                <a class="page-link border-0 text-maroon" href="?page=1">&laquo;&laquo;</a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
+                <a class="page-link border-0 text-maroon" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
             </li>
             {% endif %}
 
             {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-item"><a
-                    class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <span class="page-link bg-maroon border-maroon text-white rounded-circle mx-1">{{ num }}</span>
+                </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link border-0 text-maroon mx-1" href="?page={{ num }}">{{ num }}</a>
+                </li>
                 {% endif %}
-                {% endfor %}
+            {% endfor %}
 
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
-                        <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                </li>
-                {% endif %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link border-0 text-maroon" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link border-0 text-maroon" href="?page={{ page_obj.paginator.num_pages }}">&raquo;&raquo;</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
-    <a href="{% url 'exam-add' %}" class="btn btn-success">Add New Exam</a>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,321 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Our Impact | Ananda Scholars{% endblock %}
+
+{% block page_container %}
+<style>
+    :root {
+        --maroon: #580B0B;
+        --gold: #FFD700;
+        --gold-light: #fff9db;
+    }
+
+    /* Hero Section */
+    .impact-hero {
+        background: linear-gradient(rgba(88, 11, 11, 0.9), rgba(0,0,0,0.8)), 
+                    url("{% static 'images/school_hall.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        padding: 120px 0 80px; /* Increased padding for better breathing room */
+        color: white;
+        text-align: center;
+    }
+
+    /* Program Section Styling */
+    .program-card {
+        border: none;
+        border-radius: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        height: 100%;
+        background: #fff;
+    }
+
+    .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        background: var(--gold-light);
+        color: var(--maroon);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 1.75rem;
+        margin-bottom: 20px;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+        background: var(--maroon);
+        color: var(--gold);
+        border-radius: 25px;
+        padding: 30px;
+        margin-top: -40px;
+        position: relative;
+        z-index: 10;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Specific Program Accents */
+    .border-gold-left {
+        border-left: 5px solid var(--gold);
+    }
+
+    .text-maroon { color: var(--maroon) !important; }
+    .bg-maroon { background-color: var(--maroon) !important; }
+
+    /* --- MOBILE OPTIMIZATIONS --- */
+    @media (max-width: 767px) {
+        .impact-hero {
+            padding: 80px 15px 60px;
+            margin-top: 5px;
+        }
+        .display-4 {
+            font-size: 2.2rem !important; /* Scale down heading */
+        }
+        .stats-banner {
+            margin-top: -30px; /* Less overlap on mobile */
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .stats-banner .border-start, 
+        .stats-banner .border-end {
+            border: none !important; /* Remove vertical borders on stack */
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2) !important; /* Add horizontal separator */
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .stats-banner div:last-child {
+            border-bottom: none !important;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .cta-section {
+            padding: 30px 20px !important; /* Reduce padding on mobile footer */
+        }
+        .cta-buttons {
+            flex-direction: column; /* Stack buttons vertically */
+            width: 100%;
+        }
+        .cta-buttons .btn {
+            width: 100%; /* Full width buttons for easy tapping */
+        }
+
+
+        /* Custom CSS for the 10 enhancements */
+        .cta-card-premium {
+            background: #ffffff;
+            border-top: 5px solid var(--gold) !important; /* Visual hierarchy move */
+            transition: all 0.3s ease;
+        }
+
+        .btn-impact-primary {
+            background: linear-gradient(135deg, var(--maroon) 0%, #7a1212 100%);
+            border: none;
+            box-shadow: 0 4px 12px rgba(88, 11, 11, 0.2);
+        }
+
+        .btn-impact-primary:active {
+            transform: scale(0.96);
+        }
+
+        .secondary-link {
+            color: var(--maroon);
+            text-decoration: underline;
+            font-size: 0.9rem;
+        }
+
+
+            .cta-section-mobile {
+                padding: 2rem 1.25rem !important; /* Mobile padding fix */
+                margin-top: 2rem !important;
+            }
+            .cta-buttons-stack {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+            .cta-buttons-stack .btn {
+                width: 100%; /* Full width for thumb reach */
+            }
+
+        }
+
+        /* Shared base for all options to ensure size consistency */
+.btn-impact-secondary {
+    padding: 1rem 3rem; /* Matches px-5 py-3 */
+    border-radius: 50rem !important; /* Matches rounded-pill */
+    font-weight: 700 !important; /* Matches fw-bold */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-impact-secondary:active {
+    transform: scale(0.96);
+}
+
+/* Option 1: The Maroon Outline (Classic & Clean) */
+.btn-outline-maroon-custom {
+    border: 2px solid var(--maroon);
+    color: var(--maroon);
+    background: transparent;
+}
+.btn-outline-maroon-custom:hover {
+    background: rgba(88, 11, 11, 0.05);
+    color: #7a1212;
+}
+
+/* Option 2: The Gold Border (The "Ananda" High-Contrast) */
+.btn-outline-gold-custom {
+    border: 2px solid var(--gold);
+    color: var(--maroon);
+    background: transparent;
+}
+.btn-outline-gold-custom:hover {
+    background: var(--gold);
+    color: var(--maroon);
+}
+
+/* Option 3: The Subtle Glass (Modern & Premium) */
+.btn-glass-custom {
+    background: rgba(88, 11, 11, 0.05);
+    border: 1px solid rgba(88, 11, 11, 0.1);
+    color: var(--maroon);
+}
+.btn-glass-custom:hover {
+    background: rgba(88, 11, 11, 0.1);
+}
+
+/* Option 4: The Ghost Gold (Elegant) */
+.btn-ghost-gold {
+    border: 2px solid transparent;
+    color: var(--maroon);
+    position: relative;
+}
+.btn-ghost-gold:after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    width: 30%;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s;
+}
+.btn-ghost-gold:hover:after { width: 60%; }
+
+/* Option 5: The "Dark Mode" Secondary (Strong Hierarchy) */
+.btn-dark-secondary {
+    background: #2d2d2d;
+    color: #fff;
+    border: none;
+}
+.btn-dark-secondary:hover {
+    background: #000;
+}
+    
+
+</style>
+
+<div class="impact-hero">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Your Generosity in <span style="color: var(--gold)">Action</span></h1>
+        <p class="lead opacity-75 mx-auto" style="max-width: 800px;">
+            Every rupee donated to Ananda Scholars is transformed into academic resources, scholarships, and a home-away-from-home for our brothers.
+        </p>
+    </div>
+</div>
+
+<div class="container mb-5 px-4 px-md-3">
+    <div class="stats-banner mb-5 shadow-lg">
+        <div class="container"> <div class="row text-center align-items-center g-0">
+                <div class="col-12 col-md-4 py-3">
+                    <h2 class="fw-bold mb-0" style="color: var(--gold);">250+</h2>
+                    <small class="text-white opacity-75 d-block">Book Donation Packages</small>
+                </div>
+                
+                <div class="col-12 col-md-4 py-3 mobile-border-y">
+                    <h2 class="fw-bold mb-0" style="color: var(--gold);">120+</h2>
+                    <small class="text-white opacity-75 d-block">Students Supported</small>
+                </div>
+                
+                <div class="col-12 col-md-4 py-3">
+                    <h2 class="fw-bold mb-0" style="color: var(--gold);">100%</h2>
+                    <small class="text-white opacity-75 d-block">Donor Transparency</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-2">
+        <div class="col-lg-4 col-md-6">
+            <div class="program-card shadow-sm p-4">
+                <div class="icon-box"><i class="bi bi-book"></i></div>
+                <h3 class="text-maroon fw-bold h4">Annual Book Campaign</h3>
+                <p class="text-muted small">We provide a full set of text and exercise books, shoes, and bags to students from lower-income backgrounds annually.</p>
+                <ul class="list-unstyled small text-muted mb-0">
+                    <li class="mb-2"><i class="bi bi-check2-circle text-maroon me-2"></i> Quality stationery packs</li>
+                    <li><i class="bi bi-check2-circle text-maroon me-2"></i> Curated academic guides</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="program-card shadow-sm p-4">
+                <div class="icon-box"><i class="bi bi-cash-stack"></i></div>
+                <h3 class="text-maroon fw-bold h4">Scholarships</h3>
+                <p class="text-muted small">We provide monthly support to alleviate burdens for underprivileged families and merit-based scholarships to fuel success.</p>
+                <ul class="list-unstyled small text-muted mb-0">
+                    <li class="mb-2"><i class="bi bi-check2-circle text-maroon me-2"></i> Monthly stipends</li>
+                    <li><i class="bi bi-check2-circle text-maroon me-2"></i> Merit-based excellence awards</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+            <div class="program-card shadow-sm p-4">
+                <div class="icon-box"><i class="bi bi-house-heart"></i></div>
+                <h3 class="text-maroon fw-bold h4">Hosteler Welfare</h3>
+                <p class="text-muted small">The school hostel is a second home. We provide essential equipment and night-time academic support for hostelers.</p>
+                <ul class="list-unstyled small text-muted mb-0">
+                    <li class="mb-2"><i class="bi bi-check2-circle text-maroon me-2"></i> Study room equipment</li>
+                    <li><i class="bi bi-check2-circle text-maroon me-2"></i> Health & hygiene supplies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section-mobile cta-card-premium mt-5 p-5 rounded-4 text-center shadow">
+    <div class="mb-3 text-gold">
+        <i class="bi bi-mortarboard-fill fs-1"></i>
+    </div>
+    
+    <h2 class="text-maroon fw-bold h4 mb-2">Empower an Ananda Scholar</h2>
+    <p class="text-muted mb-4 px-2 small">
+        Small acts lead to big futures. Your contribution fuels the ambitions of our students.
+    </p>
+
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 cta-buttons-stack">
+        <!-- <a href="https://karuna.lk/program/anandacollegeoba.html" target="_blank" class="btn btn-impact-primary text-white px-5 py-3 rounded-pill fw-bold">
+            <i class="bi bi-heart-fill me-2"></i>&nbsp;Donate Now
+        </a> -->
+        
+       <a href="{% url 'student-list' %}" class="btn-impact-secondary btn-outline-maroon-custom">
+             <i class="bi bi-mortarboard-fill ms-2"></i> &nbsp; Academic Success  
+        </a>
+    </div>
+
+    <div class="mt-4 small text-muted opacity-75">
+        <i class="bi bi-people-fill"></i> Join our community of 150+ donors
+    </div>
+</div>
+</div>
+
+{% endblock %}

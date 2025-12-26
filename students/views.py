@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Student, Patron
 from examrecords.models import ExamRecord
 from django.urls import reverse_lazy
@@ -348,3 +348,14 @@ class StudentDeleteView(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
                 return JsonResponse({'success': False, 'error': str(e)})
         else:
             return super().post(request, *args, **kwargs)
+        
+
+class ImpactView(TemplateView):
+    template_name = 'impact.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Todo: Pulling real counts from your models
+        # context['book_count'] = BookDonation.objects.count()
+        # context['scholar_count'] = Student.objects.filter(is_scholar=True).count()
+        return context

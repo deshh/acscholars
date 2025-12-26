@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include 
 from django.conf import settings
 from customaccounts import views
+from students.views import ImpactView
 
 urlpatterns = [
     # Django admin
@@ -32,6 +33,7 @@ urlpatterns = [
     path('exams/', include('exams.urls')),
     path('subjects/', include('subjects.urls')),
     path('patrons/', include('patrons.urls')),
+    path('our-impact/', ImpactView.as_view(), name='about-us'),
 ]
 
 if getattr(settings, 'REGISTER_FLOW_ENABLED', False):

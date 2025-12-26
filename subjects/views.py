@@ -18,6 +18,12 @@ class SubjectListView(GroupRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  # Ensure this line is present
         # Add additional context if needed
+
+        is_operator = False
+        if self.request.user.is_authenticated:
+            is_operator = self.request.user.groups.filter(name='operator').exists()
+
+        context['is_operator'] = is_operator
         return context
 
     # def get_queryset(self):

@@ -14,6 +14,17 @@ class ExamListView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     paginate_by = 10
     group_required = 'operator'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        is_operator = False
+        if self.request.user.is_authenticated:
+            is_operator = self.request.user.groups.filter(name='operator').exists()
+        
+        context['is_operator'] = is_operator
+        return context
+        
+
 
 # Exam Views
 class ExamCreateView(LoginRequiredMixin, GroupRequiredMixin, CreateView):

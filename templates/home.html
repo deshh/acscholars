@@ -1,71 +1,159 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}Ananda Scholars{% endblock %}
+{% block title %}Ananda Scholars | Empowering Excellence{% endblock %}
 
 {% block navbar %}
+{# Explicitly empty if you want a clean hero look, or add a minimal floating nav here #}
 {% endblock navbar %}
 
 {% block page_container %}
 <style>
-/* * CRITICAL FIXES: These must be applied to the top-level elements (body/html).
- * The !important is used here for maximum conflict resolution.
- */
-body, html {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-    height: 100%; 
-    overflow-x: hidden; 
-}
-.hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url("{% static 'images/budumadura.png' %}");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; 
-    min-height: 100vh; 
-    width: 100%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-/* Remaining button and logo styles */
-@keyframes spin-vertical {
-    from { transform: perspective(1000px) rotateY(0deg); }
-    to { transform: perspective(1000px) rotateY(360deg); }
-}
-.rotate-logo {
-    animation: spin-vertical 6s linear infinite;
-    transform-style: preserve-3d;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
-}
-.btn-results {
-    background-color: transparent; 
-    border-color: #FFD700;
-    color: #FFD700;
-    transition: background-color 0.3s, color 0.3s;
-}
-.btn-results:hover {
-    background-color: #FFD700; 
-    color: #333;
-    border-color: #FFD700;
-}
-.btn-donate {
-    background-color: #FFD700;
-    color: #580B0B;
-    border: 2px solid #FFD700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-donate:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.7);
-    background-color: #FFD700;
-}
+    /* --- Global & Reset --- */
+    body, html {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        height: 100%; 
+        overflow-x: hidden; 
+    }
 
+    /* --- Hero Section --- */
+    .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                    url("{% static 'images/budumadura.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; 
+        min-height: 100dvh; /* Dynamic viewport height fix for mobile browsers */
+        width: 100%; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 2rem 0;
+    }
 
+    /* --- Logo Animation --- */
+    @keyframes spin-vertical {
+        from { transform: perspective(1000px) rotateY(0deg); }
+        to { transform: perspective(1000px) rotateY(360deg); }
+    }
+    .rotate-logo {
+        animation: spin-vertical 8s linear infinite;
+        transform-style: preserve-3d;
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+    }
+
+    /* --- Primary Action: Donate (Gold) --- */
+    .btn-donate {
+        background: linear-gradient(45deg, #FFD700, #FFC107);
+        color: #580B0B !important;
+        border: none;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+    }
+    .btn-donate:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        background: #FFD700;
+    }
+
+    /* --- Secondary Action: Results (Glass) --- */
+    .btn-results {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 2px solid rgba(255, 215, 0, 0.5);
+        color: #FFD700;
+        transition: all 0.3s ease;
+    }
+    .btn-results:hover {
+        background: rgba(255, 215, 0, 0.15);
+        color: #fff;
+        border-color: #FFD700;
+    }
+
+    /* --- Trust/Payment Container --- */
+    .trust-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 10px 20px;
+        border-radius: 50px; 
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(255, 215, 0, 0.4);
+    }
+    .trust-label {
+        font-size: 0.65rem;
+        letter-spacing: 1.5px;
+        color: #580B0B;
+        border-right: 1px solid #ddd;
+        padding-right: 15px;
+        margin-right: 15px;
+    }
+
+    /* --- Impact Section Teaser --- */
+    .impact-teaser {
+        background-color: #fff;
+        border-top: 5px solid #FFD700;
+    }
+    .text-maroon { color: #580B0B; }
+    .btn-outline-maroon {
+        /* Normal View - No more Blue */
+        background-color: transparent !important;
+        border: 2px solid #580B0B !important;
+        color: #580B0B !important;
+        transition: all 0.3s ease;
+    }
+    .btn-outline-maroon:hover {
+        /* Hover View */
+        background-color: #580B0B !important;
+        color: #FFD700 !important; /* Gold text on Maroon background */
+        border-color: #580B0B !important;
+        transform: translateY(-2px);
+    }
+
+    /* --- Mobile Enhancements --- */
+    @media (max-width: 768px) {
+        .hero-section { 
+            background-attachment: scroll; 
+            padding: 3rem 1rem;
+        }
+        .display-3 { font-size: 2.8rem !important; }
+        .lead { font-size: 1.1rem !important; padding: 0 1rem; }
+        .rotate-logo { max-height: 150px !important; }
+        
+        .trust-container {
+            flex-direction: column;
+            border-radius: 15px;
+            padding: 15px;
+        }
+        .trust-label {
+            border-right: none;
+            border-bottom: 1px solid #ddd;
+            padding-right: 0;
+            margin-right: 0;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .btn-outline-maroon {
+        /* Normal View - No more Blue */
+        background-color: transparent !important;
+        border: 2px solid #580B0B !important;
+        color: #580B0B !important;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-maroon:hover {
+        /* Hover View */
+        background-color: #580B0B !important;
+        color: #FFD700 !important; /* Gold text on Maroon background */
+        border-color: #580B0B !important;
+        transform: translateY(-2px);
+    }
 </style>
 
 {% block content %}
@@ -80,34 +168,82 @@ body, html {
 
         <h1 class="display-3 fw-bold mb-3">Ananda Scholars</h1>
         <p class="lead mb-5 mx-auto text-light opacity-75" style="max-width: 700px;">
-            Join us in empowering the next generation of Anandians.
+            Join us in empowering the next generation of Anandians through merit-based scholarships and community support.
         </p>
 
         <div class="row justify-content-center g-4">
-            <div class="col-md-5 col-lg-4">
-                <a href="{% url 'student-list' %}" class="btn btn-results w-100 py-3 rounded-pill fw-bold">
-                    <i class="bi bi-mortarboard"></i> View Student Results
+            <div class="col-12 col-md-5 col-lg-4">
+                <a href="https://karuna.lk/program/anandacollegeoba.html" target="_blank" class="btn btn-donate w-100 py-3 rounded-pill fw-bold">
+                    <i class="bi bi-heart-fill me-2"></i>CONTRIBUTE NOW
                 </a>
             </div>
-
-            <div class="col-md-5 col-lg-4">
-                <a href="https://karuna.lk/program/anandacollegeoba.html" target="_blank" class="btn btn-donate w-100 py-3 rounded-pill fw-bold">
-                    MAKE A CONTRIBUTION
+            <div class="col-12 col-md-5 col-lg-4">
+                <a href="{% url 'student-list' %}" class="btn btn-results w-100 py-3 rounded-pill fw-bold">
+                    <i class="bi bi-search me-2"></i>VIEW RESULTS
                 </a>
             </div>
         </div>
 
-        <div class="mt-5 pt-4 border-top border-warning mx-auto" style="max-width: 500px;">
-            <p class="small text-uppercase text-muted mb-2 fw-bold" style="color: #FFD700 !important;">Secure Payments</p>
-            <div class="bg-white p-2 rounded d-inline-block shadow-sm">
-                <img src="{% static 'images/karuna.png' %}" height="35" class="me-3" alt="Karuna.lk">
-                <img src="{% static 'images/payments.jpg' %}" height="30" alt="Visa, MasterCard, Bank Transfer">
+        <div class="mt-5">
+            <div class="trust-container shadow-lg">
+                <span class="trust-label fw-bold">
+                    <i class="bi bi-shield-lock-fill"></i> SECURE PAYMENTS
+                </span>
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'images/karuna.png' %}" height="25" class="me-3" alt="Karuna">
+                    <img src="{% static 'images/payments.jpg' %}" height="20" alt="Payment Methods">
+                </div>
             </div>
+        </div>
+        
+        <div class="mt-5 d-none d-md-block">
+            <a href="#impact" class="text-light text-decoration-none opacity-50 small">
+                Learn how your funds are utilized <br>
+                <i class="bi bi-chevron-down fs-4"></i>
+            </a>
         </div>
     </div>
 </div>
+
+<section id="impact" class="py-5 impact-teaser">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h2 class="display-5 text-maroon fw-bold mb-4">Our Mission & Impact</h2>
+                <p class="text-muted fs-5 mb-4">
+                    The Ananda Scholars program is dedicated to ensuring that financial barriers never stand in the way of a brilliant student's education. 
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+                    <a href="{% url 'about-us' %}" class="btn btn-outline-maroon btn-lg rounded-pill px-5">
+                        Discover What We Do
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-4">
+                    <div class="col-6">
+                        <div class="p-4 border rounded shadow-sm text-center bg-light">
+                            <i class="bi bi-people fs-1 text-maroon"></i>
+                            <h3 class="text-maroon fw-bold mt-2">120+</h3>
+                            <p class="small text-uppercase text-muted mb-0">Scholars Funded</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 border rounded shadow-sm text-center bg-light">
+                            <i class="bi bi-check-circle fs-1 text-maroon"></i>
+                            <h3 class="text-maroon fw-bold mt-2">100%</h3>
+                            <p class="small text-uppercase text-muted mb-0">Transparency</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
 
 {% endblock page_container %}
+
 {% block footer %}
+{# Add a minimal footer here if needed #}
 {% endblock footer %}
